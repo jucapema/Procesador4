@@ -1,4 +1,3 @@
-
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
  
@@ -6,30 +5,34 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY tb_programCounter IS
-END tb_programCounter;
+ENTITY tbPSR IS
+END tbPSR;
  
-ARCHITECTURE behavior OF tb_programCounter IS 
+ARCHITECTURE behavior OF tbPSR IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT ProgramCounter
+    COMPONENT PSR
     PORT(
+         reset : IN  std_logic;
          clk : IN  std_logic;
-         pc_entrada : IN  std_logic_vector(31 downto 0);
-         pc_salida : OUT  std_logic_vector(31 downto 0);
-         reset : IN  std_logic
+         salidaPSR : OUT  std_logic;
+         nzvc : IN  std_logic_vector(3 downto 0);
+         ncwp : IN  std_logic;
+         cwp : OUT  std_logic
         );
     END COMPONENT;
     
 
    --Inputs
-   signal clk : std_logic := '0';
-   signal pc_entrada : std_logic_vector(31 downto 0) := (others => '0');
    signal reset : std_logic := '0';
+   signal clk : std_logic := '0';
+   signal nzvc : std_logic_vector(3 downto 0) := (others => '0');
+   signal ncwp : std_logic := '0';
 
  	--Outputs
-   signal pc_salida : std_logic_vector(31 downto 0);
+   signal salidaPSR : std_logic;
+   signal cwp : std_logic;
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -37,11 +40,13 @@ ARCHITECTURE behavior OF tb_programCounter IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: ProgramCounter PORT MAP (
+   uut: PSR PORT MAP (
+          reset => reset,
           clk => clk,
-          pc_entrada => pc_entrada,
-          pc_salida => pc_salida,
-          reset => reset
+          salidaPSR => salidaPSR,
+          nzvc => nzvc,
+          ncwp => ncwp,
+          cwp => cwp
         );
 
    -- Clock process definitions
@@ -57,16 +62,12 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    begin		
-      reset <= '1';
+      reset<='1';
+		ncwp<='0';
+		nzvc<="0101";
       wait for 100 ns;	
-		reset <= '0'; 
-		pc_entrada <= x"00000001";       
-		wait for 20 ns;
-		pc_entrada <= x"0000000A";
-		wait for 20 ns;
-		pc_entrada <= x"00000010";
-		wait for 20 ns;
-		reset <= '0'; 
+		reset<='0';
+		ncwp<='1';
       wait;
    end process;
 

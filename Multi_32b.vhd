@@ -1,33 +1,25 @@
-----------------------------------------------------------------------------------
---											    Integrantes:										  --
---							        Juan camilo pelaez Martinez 						     --
---										  Cesar Augusto Morales 		         			  --
---								       Sebastian Londoño marin		    					  --
---																										  --
-----------------------------------------------------------------------------------
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
+entity multiplexor32 is
+    Port ( entrada1 : in  STD_LOGIC_VECTOR (31 downto 0);
+           entrada2 : in  STD_LOGIC_VECTOR (31 downto 0);
+           senalControl : in  STD_LOGIC;
+           salida_mux : out  STD_LOGIC_VECTOR (31 downto 0));
+end multiplexor32;
 
-
-entity Multi_32b is
-    Port ( mul_int1 : in  STD_LOGIC_VECTOR (31 downto 0);
-           mul_int2 : in  STD_LOGIC_VECTOR (31 downto 0);
-           clk_mul : in  STD_LOGIC;
-           mul_out : out  STD_LOGIC_VECTOR (31 downto 0));
-end Multi_32b;
-
-architecture Behavioral of Multi_32b is
+architecture Behavioral of multiplexor32 is
 
 begin
---
-process (mul_int1,mul_int2, clk_mul)
+
+process (entrada1, entrada2, senalControl)
 	begin
 	
-		if (clk_mul = '0') then
-			mul_out <= mul_int1;-- entra int1 o int2
+		if (senalControl = '0') then
+			salida_mux <= entrada1;
 		else
-			mul_out <= mul_int2;
+			salida_mux <= entrada2;
 		end if;
 	
 	end process;

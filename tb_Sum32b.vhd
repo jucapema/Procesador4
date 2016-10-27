@@ -1,56 +1,59 @@
---------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
  
-
-ENTITY tb_Sum32b IS
-END tb_Sum32b;
+ENTITY tb_sumador32 IS
+END tb_sumador32;
  
-ARCHITECTURE behavior OF tb_Sum32b IS 
+ARCHITECTURE behavior OF tb_sumador32 IS 
  
- 
-    COMPONENT Sum32b
+    
+    COMPONENT sumador32
     PORT(
-         x : IN  std_logic_vector(31 downto 0);
-         y : IN  std_logic_vector(31 downto 0);
-         add_out : OUT  std_logic_vector(31 downto 0)
+         a : IN  std_logic_vector(31 downto 0);
+         b : IN  std_logic_vector(31 downto 0);
+         salidaSumador : OUT  std_logic_vector(31 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal x : std_logic_vector(31 downto 0) := (others => '0');
-   signal y : std_logic_vector(31 downto 0) := (others => '0');
+   signal a : std_logic_vector(31 downto 0) := (others => '0');
+   signal b : std_logic_vector(31 downto 0) := (others => '0');
 
  	--Outputs
-   signal add_out : std_logic_vector(31 downto 0);
-  
-    
+   signal salidaSumador : std_logic_vector(31 downto 0);
+   -- No clocks detected in port list. Replace <clock> below with 
+   -- appropriate port name 
+ 
+   
+ 
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: Sum32b PORT MAP (
-          x => x,
-          y => y,
-          add_out => add_out
+   uut: sumador32 PORT MAP (
+          a => a,
+          b => b,
+          salidaSumador => salidaSumador
         );
 
+  
 
-
-      -- insert stimulus here    -- Stimulus process
+   -- Stimulus process
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
-		x <= "00000000000000000000000000000001";
-		y <= "00000000000000000000000000000010";
+		a <= "00000000000000000000000000000000";
+		b <= "00000000000000000000000000000001";
       wait for 100 ns;
-		x <= "00000000000000000000000000000010";
-		y <= "00000000000000000000000000000011";
+		a <= "00000000000000000000000000000010";
+		b <= "00000000000000000000000000000011";
       wait for 100 ns;	
-		x <= "00000000000000000000000000001000";
-		y <= "00000000000000000000000000000101";
+		a <= "00000000000000000000000000010000";
+		b <= "00000000000000000000000000010001";
       wait for 100 ns;		
+
       
       wait;
    end process;
+
 END;

@@ -1,22 +1,21 @@
-----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-entity Sum32b is
-    Port ( x : in  STD_LOGIC_VECTOR (31 downto 0);
-           y : in  STD_LOGIC_VECTOR (31 downto 0);
-           add_out : out  STD_LOGIC_VECTOR (31 downto 0));
-end Sum32b;
+entity sumador32 is
+    Port ( a : in  STD_LOGIC_VECTOR (31 downto 0);
+           b : in  STD_LOGIC_VECTOR (31 downto 0);
+           salidaSumador : out  STD_LOGIC_VECTOR (31 downto 0));
+end sumador32;
 
-architecture Behavioral of Sum32b is
+architecture Behavioral of sumador32 is
 
 begin
 
-process (x, y)
+process (a, b)
 	begin
 		
-		add_out <= x + y; 
+		salidaSumador <= a + b; 
 	
 	end process;
 

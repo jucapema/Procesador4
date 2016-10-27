@@ -5,19 +5,19 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY tb_npc IS
-END tb_npc;
+ENTITY tbNPC IS
+END tbNPC;
  
-ARCHITECTURE behavior OF tb_npc IS 
+ARCHITECTURE behavior OF tbNPC IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT npc
+    COMPONENT NProgramCounter
     PORT(
          clk : IN  std_logic;
          reset : IN  std_logic;
-         intNPC : IN  std_logic_vector(31 downto 0);
-         outNPC : OUT  std_logic_vector(31 downto 0)
+         entradaNProgramCounter : IN  std_logic_vector(31 downto 0);
+         salidaNProgramCounter : OUT  std_logic_vector(31 downto 0)
         );
     END COMPONENT;
     
@@ -25,10 +25,10 @@ ARCHITECTURE behavior OF tb_npc IS
    --Inputs
    signal clk : std_logic := '0';
    signal reset : std_logic := '0';
-   signal intNPC : std_logic_vector(31 downto 0) := (others => '0');
+   signal entradaNProgramCounter : std_logic_vector(31 downto 0) := (others => '0');
 
  	--Outputs
-   signal outNPC : std_logic_vector(31 downto 0);
+   signal salidaNProgramCounter : std_logic_vector(31 downto 0);
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -36,11 +36,11 @@ ARCHITECTURE behavior OF tb_npc IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: npc PORT MAP (
+   uut: NProgramCounter PORT MAP (
           clk => clk,
           reset => reset,
-          intNPC => intNPC,
-          outNPC => outNPC
+          entradaNProgramCounter => entradaNProgramCounter,
+          salidaNProgramCounter => salidaNProgramCounter
         );
 
    -- Clock process definitions
@@ -59,11 +59,11 @@ BEGIN
       reset <= '1';
       wait for 100 ns;	
 		reset <= '0'; 
-		intNPC <= x"00000001";       
+		entradaNProgramCounter <= x"00000001";       
 		wait for 20 ns;
-		intNPC <= x"0000000A";
+		entradaNProgramCounter <= x"0000000A";
 		wait for 20 ns;
-		intNPC <= x"00000010";
+		entradaNProgramCounter <= x"00000010";
 		wait for 20 ns;
 		reset <= '0'; 
       wait;
