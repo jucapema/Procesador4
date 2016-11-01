@@ -27,6 +27,9 @@ ARCHITECTURE behavior OF tbProcesador IS
 
  	--Outputs
    signal salidaAlu : std_logic_vector(31 downto 0);
+	
+
+	
 
    -- Clock period definitions
    constant clk_period : time := 20 ns;

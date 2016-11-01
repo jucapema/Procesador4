@@ -4,7 +4,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity Procesador is
     Port ( clk : in  STD_LOGIC;
            reset : in  STD_LOGIC;
-           salidaAlu : out  STD_LOGIC_VECTOR (31 downto 0));
+           salidaAlu : out  STD_LOGIC_VECTOR (31 downto 0)
+			  );
 end Procesador;
 
 architecture Behavioral of Procesador is

@@ -60,6 +60,10 @@ process (op, op3)
 					salidaUnidadControl <= "010101"; -- save
 				when("111101") =>
 					salidaUnidadControl <= "010110"; -- restore
+				when("100101") =>
+					salidaUnidadControl <= "010111"; --SLL
+				when("100110") => 
+					salidaUnidadControl <= "011000"; --SRL
 				when others =>
 					salidaUnidadControl <= "000000";
 			end case;

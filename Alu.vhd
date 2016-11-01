@@ -1,6 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use ieee.numeric_std.ALL;
 
 entity ALU is
     Port ( dato1Alu : in  STD_LOGIC_VECTOR (31 downto 0);
@@ -36,6 +37,10 @@ process(dato1Alu,dato2Alu,operacionAlu ,carry)
 			salidaAlu <= dato1Alu + dato2Alu + carry;
 		elsif (operacionAlu  = "001101") or (operacionAlu  = "001110") then	-- Subx or Subxcc
 			salidaAlu <= dato1Alu - dato2Alu - carry;
+		elsif (operacionAlu = "010111") then --SLL
+			salidaAlu <= to_stdlogicvector(to_bitvector(dato1Alu) sll conv_integer(dato2Alu));
+		elsif (operacionAlu = "011000") then-- SRL
+			salidaAlu <= to_stdlogicvector(to_bitvector(dato1Alu) srl conv_integer(dato2Alu));
 		else salidaAlu <= (others=>'0');
 		end if;
 	end process;
